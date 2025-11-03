@@ -5,6 +5,7 @@ import readline from "readline";
 
 const pattern = process.argv[2];
 const filename = process.argv[3];
+const isCaseSensitive = process.argv[4] === '-i';
 
 const fileStream = fs.createReadStream(filename);
 const readLine = readline.createInterface({
@@ -15,7 +16,11 @@ const readLine = readline.createInterface({
 let results = [];
 
 readLine.on('line', (line) => {
-  if (line.includes(pattern)) {
+  const matches = isCaseSensitive
+    ? line.includes(pattern)
+    : line.toLowerCase().includes(pattern.toLowerCase());
+  
+  if (matches) {
     results.push(line);
   }
 });
