@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import fs from "fs";
 import readline from "readline";
 
@@ -16,13 +15,7 @@ const readLine = readline.createInterface({
 let results = [];
 
 readLine.on('line', (line) => {
-  const matches = isCaseSensitive
-    ? line.includes(pattern)
-    : line.toLowerCase().includes(pattern.toLowerCase());
-  
-  if (matches) {
-    results.push(line);
-  }
+  processLine(line);
 });
 
 readLine.on('close', () => {
@@ -30,3 +23,13 @@ readLine.on('close', () => {
     console.log(`${idx + 1}. "...${item}..."`);
   })
 });
+
+const processLine = (line) => {
+  const matches = isCaseSensitive
+    ? line.includes(pattern)
+    : line.toLowerCase().includes(pattern.toLowerCase());
+
+  if (matches) {
+    results.push(line);
+  }
+};
