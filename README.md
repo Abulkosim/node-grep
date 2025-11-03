@@ -1,6 +1,6 @@
 # node-grep
 
-A simple grep-like tool written in Node.js that searches for a pattern in a file and displays matching lines.
+A simple grep-like tool written in Node.js that searches for a pattern in one or more files and displays matching lines.
 
 ## Installation
 
@@ -13,13 +13,33 @@ npm link
 ## Usage
 
 ```bash
-ngrep <pattern> <filename>
+ngrep <pattern> [-i] <file1> [file2] ...
 ```
 
-### Example
+### Options
 
+- `-i` : Case-insensitive search (ignore case)
+
+### Examples
+
+**Search in a single file:**
 ```bash
 ngrep "hello" input.txt
 ```
 
-This will search for lines containing "hello" in `input.txt` and display numbered results.
+**Search in multiple files:**
+```bash
+ngrep "hello" input.txt output.txt
+```
+
+**Case-insensitive search:**
+```bash
+ngrep -i "Hello" input.txt
+```
+
+**Case-insensitive search in multiple files:**
+```bash
+ngrep "hello" -i file1.txt file2.txt file3.txt
+```
+
+When searching multiple files, results are displayed with the filename prefix (e.g., `filename:line`). Single file searches display results without the filename prefix.
